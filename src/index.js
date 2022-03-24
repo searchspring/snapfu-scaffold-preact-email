@@ -33,7 +33,7 @@ const config = {
 		recommendation: {
 			components: {
 				Email: async () => {
-					return (await import('./components/Recommendations/')).Email;
+					return (await import('./components/Recommendations/Email')).Email;
 				},
 			},
 			config: {
@@ -41,8 +41,7 @@ const config = {
 			},
 		},
 	},
-	controllers: {
-	},
+	controllers: {},
 };
 
 const snap = new Snap(config);
