@@ -20,8 +20,9 @@
     <script id="searchspring-context" src="bundle.js"></script>
 
     <script>
-        // To test an email component. Simply put the component name here    
+        // To test an email component. Simply put the component name here, and the siteId used in the root index.js
         const component = "Email";
+        const siteID = '8uyt2m';
         //this needs to be updated to whatever your current branch is in order for the test page to work properly. 
         const currentBranch = "production";
         //If you want to test it with specific products, you can put the data here, otherwise here are some default example products. 
@@ -29,11 +30,10 @@
        
         //everything else is boilderplate and can be ignored
         const profile = "email-test";
-        const siteID = 'dr9isr';
         const recommendResponse = [{"results":results,"profile":{"tag":profile}}];
         const profileResponse = {"profile":{"tag":profile,"display":{"template":{"component":component},"templateParameters":{}}}};
         const profileKey = `/api/personalized-recommendations/profile.json{"tag":"${profile}","siteId":"${siteID}","branch":"${currentBranch}"}`;
-        const recommendKey = `/boost/${siteID}/recommend{"tags":["${profile}"],"siteId":"${siteID}","test":true}`;
+        const recommendKey = `/boost/${siteID}/recommend{"tags":["${profile}"],"limits":[20],"siteId":"${siteID}","test":true}`;
 
         searchspring.client.requesters.recommend.cache.set(profileKey, profileResponse);
         searchspring.client.requesters.recommend.cache.set(recommendKey, recommendResponse);
