@@ -27,10 +27,8 @@
         }
 
         if (!config.siteID) {
-            alert('No siteId found. Please check you email.html config.');
             console.error('No siteId found. Please check you email.html config.');
         }else {
-            //all boilderplate and can be ignored 
             const profile = "trending";
             const { results, component, siteID, currentBranch } = config;
             const profileResponse = {"profile":{"tag":profile,"display":{"template":{"component":component},"templateParameters":{}}}};
