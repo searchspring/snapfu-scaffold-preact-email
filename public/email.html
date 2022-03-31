@@ -12,16 +12,24 @@
         document.cookie = 'ssShopperId=; Max-Age=-99999999;';
     </script>
 
-    <script id="searchspring-context" src="bundle.js"></script>
-
+    <script id="searchspring-context" src="bundle.js">
+        config = {
+            instantiators: {
+                recommendation: {
+                    config: {
+                        branch: "development"
+                    }
+                }
+            }
+        }
+    </script>
+    
     <script>
 
         const config = {
             // To test an email component. Simply put the component name here, and the siteId used in the root index.js
             component: "Email",
             siteID: '{{snapfu.siteId}}',
-            //this needs to be updated to whatever your current branch is in order for the test page to work properly. 
-            currentBranch: "development",
             //If you want to test with specific products, you can put the data here, otherwise leave out and it will autofetch trending products. 
             // results: [{"id":"175547","mappings":{"core":{"uid":"175547","name":"Off She Goes White Skinny Jeans","sku":"C-JU-W1-P1034","msrp":75,"price":58,"thumbnailImageUrl":"https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/use_3_thumb_med.jpg","url":"/product/C-JU-W1-P1034","rating":"5","brand":"Just USA","popularity":4455,"imageUrl":"https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/use_3_large.jpg","ratingCount":1111}},"attributes":{}}],
         }
@@ -32,7 +40,7 @@
             const profile = "trending";
             const { results, component, siteID, currentBranch } = config;
             const profileResponse = {"profile":{"tag":profile,"display":{"template":{"component":component},"templateParameters":{}}}};
-            const profileKey = `/api/personalized-recommendations/profile.json{"tag":"${profile}","siteId":"${siteID}","branch":"${currentBranch}"}`;
+            const profileKey = `/api/personalized-recommendations/profile.json{"tag":"${profile}","siteId":"${siteID}","branch":"development"}`;
 
             searchspring.client.requesters.recommend.cache.set(profileKey, profileResponse);
 
