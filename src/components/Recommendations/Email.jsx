@@ -15,7 +15,7 @@ export class Email extends Component {
 				},
 			},
 		};
-		return store.results.length && (
+		return store.results.length > 0 && (
 			<div>
 				{store.results.map((result, idx) => (
 					//****** IMPORTANT  *******//
