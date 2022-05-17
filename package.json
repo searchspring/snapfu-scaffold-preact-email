@@ -21,10 +21,13 @@
 	"searchspring": {
 		"siteId": "{{snapfu.siteId}}",
 		"framework": "preact",
+		"template": "snapfu-template-preact-email",
 		"updates": [
 			"all"
 		],
-		"tags": []
+		"tags": [
+			"email"
+		]
 	},
 	"prettier": "@searchspring/prettier",
 	"dependencies": {
