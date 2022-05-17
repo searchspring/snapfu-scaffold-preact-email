@@ -1,32 +1,56 @@
 import { h, Fragment, Component } from 'preact';
 import { observer } from 'mobx-react';
+import classnames from 'classnames';
 
 import { Result } from '@searchspring/snap-preact-components';
+
+import './Email.scss';
+
+/**
+ * COMPONENT MUST BE FULLY SELF-CONTAINED
+ *
+ * Intended to render results to generate images for email recommendations.
+ * 
+ * Details:
+ *  - component should not render a grid (1 result per line)
+ *  - cannot tie into external scripting
+ *  - all styling and fonts must be bundled
+ *  - lazy loading should be disabled
+ *  - each result must have id={`ss-emailrec${index}`}
+ *  - results should not contain any interactive elements (ie. image pagination arrows, color swatches)
+ * 
+ * Test:
+ *  - https://localhost:3333/email.html
+ * 
+ **/
 
 @observer
 export class Email extends Component {
 	render() {
 		const controller = this.props.controller;
 		const store = controller?.store;
-		const theme = {
-			components: {
-				image: {
-					lazy: false,
-				},
-			},
-		};
+
 		return store.results.length > 0 && (
-			<div>
+			<Fragment>
 				{store.results.map((result, idx) => (
-					//****** IMPORTANT  *******//
-					// THIS OUTER "ss-emailrec" WRAPPER IS REQUIRED FOR EMAIL RECS TO WORK PROPERLY.
-					// DO NOT REMOVE OR EDIT IT
-					<div key={idx} id={\`ss-emailrec\${idx}\`} style={{ display: 'block', width: '240px' }}>
-						{/* make your result changes here  */}
-						<Result result={result} theme={theme}></Result>
+					/* THIS OUTER "ss-emailrec" WRAPPER SHOULD NOT BE REMOVED, IT IS REQUIRED */
+					<div key={idx} id={`ss-emailrec${idx}`} style={{ display: 'block', width: '240px' }}>
+						{/* BEGIN result component changes */}
+						<Result
+							result={result}
+							hideBadge
+							theme={{
+								components: {
+									image: {
+										// lazy loading should be disabled
+										lazy: false,	
+									},
+								},
+							}} />
+						{/* END result component changes */}
 					</div>
 				))}
-			</div>
+			</Fragment>
 		);
 	}
 }

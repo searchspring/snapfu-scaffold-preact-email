@@ -1,3 +1,18 @@
+<!--
+
+    ****************************************
+
+    DO NOT ADD STYLESHEETS OR SCRIPTS
+
+    ****************************************
+
+    Only make edits to the script section:
+    "Template Mockup Configuration"
+
+    ****************************************
+
+-->
+
 <!DOCTYPE html>
 <html>
 
@@ -8,8 +23,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <script>
-        //this is needed to clear our the cookies so you dont have viewedIds or shopperIds in the request so we can intercept it.
+        // clear our cookies to remove from the request
         document.cookie = 'ssShopperId=; Max-Age=-99999999;';
+        document.cookie = 'ssViewedProducts=; Max-Age=-99999999';
+        document.cookie = 'ssCartProducts=; Max-Age=-9999999';
     </script>
 
     <script id="searchspring-context" src="bundle.js">
@@ -25,28 +42,29 @@
     </script>
     
     <script>
+        /* Template Mockup Configuration Section */
 
         const config = {
-            // To test an email component. Simply put the component name here, and the siteId used in the root index.js
-            component: "Email",
-            siteID: '{{snapfu.siteId}}',
-            //If you want to test with specific products, you can put the data here, otherwise leave out and it will autofetch trending products. 
-            // results: [{"id":"175547","mappings":{"core":{"uid":"175547","name":"Off She Goes White Skinny Jeans","sku":"C-JU-W1-P1034","msrp":75,"price":58,"thumbnailImageUrl":"https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/use_3_thumb_med.jpg","url":"/product/C-JU-W1-P1034","rating":"5","brand":"Just USA","popularity":4455,"imageUrl":"https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/use_3_large.jpg","ratingCount":1111}},"attributes":{}}],
+            component: "Email", // name of component to test
+            siteId: '{{snapfu.siteId}}', // siteId should match what is in index.js
         }
 
-        if (!config.siteID) {
+        // to test with specific data uncomment the following line and alter as needed
+        // config.results = [{"id":"175547","mappings":{"core":{"uid":"175547","name":"Off She Goes White Skinny Jeans","sku":"C-JU-W1-P1034","msrp":75,"price":58,"thumbnailImageUrl":"https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/use_3_thumb_med.jpg","url":"/product/C-JU-W1-P1034","rating":"5","brand":"Just USA","popularity":4455,"imageUrl":"https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/use_3_large.jpg","ratingCount":1111}},"attributes":{}}],
+
+        if (!config.siteId) {
             console.error('No siteId found. Please check you email.html config.');
-        }else {
+        } else {
             const profile = "trending";
-            const { results, component, siteID, currentBranch } = config;
+            const { results, component, siteId, currentBranch } = config;
             const profileResponse = {"profile":{"tag":profile,"display":{"template":{"component":component},"templateParameters":{}}}};
-            const profileKey = `/api/personalized-recommendations/profile.json{"tag":"${profile}","siteId":"${siteID}","branch":"development"}`;
+            const profileKey = `/api/personalized-recommendations/profile.json{"tag":"${profile}","siteId":"${siteId}","branch":"development"}`;
 
             searchspring.client.requesters.recommend.cache.set(profileKey, profileResponse);
 
             if (config.results) {
                 const recommendResponse = [{"results":results,"profile":{"tag":profile}}];
-                const recommendKey = `/boost/${siteID}/recommend{"tags":["${profile}"],"limits":[20],"siteId":"${siteID}","test":true}`;
+                const recommendKey = `/boost/${siteId}/recommend{"tags":["${profile}"],"limits":[20],"siteId":"${siteId}","test":true}`;
                 searchspring.client.requesters.recommend.cache.set(recommendKey, recommendResponse);
             }
         }
