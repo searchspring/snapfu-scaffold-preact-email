@@ -24,3 +24,4 @@ jobs:
           GITHUB_BOT_TOKEN: ${{ secrets.MACHINE_TOKEN }}
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           skipLighthouse: true
+          secrets: ${{ toJSON(secrets) }}
