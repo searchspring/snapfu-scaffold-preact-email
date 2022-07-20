@@ -1,29 +1,11 @@
 /* searchspring imports */
 import { Snap } from '@searchspring/snap-preact';
-import { getContext } from '@searchspring/snap-toolbox';
 
 /* local imports */
 import './styles/custom.scss';
 
-/*
-	context and background filtering
- */
-
-const context = getContext(['shopper']);
-
-/*
-	configuration and instantiation
- */
-
+/* configuration and instantiation */
 const config = {
-	context,
-	url: {
-		parameters: {
-			core: {
-				query: { name: 'q' },
-			},
-		},
-	},
 	client: {
 		globals: {
 			siteId: '{{snapfu.siteId}}',
