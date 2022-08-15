@@ -1,4 +1,4 @@
-import { h, Fragment, Component } from 'preact';
+import { h } from 'preact';
 import { observer } from 'mobx-react';
 import classnames from 'classnames';
 
@@ -10,7 +10,7 @@ import './Email.scss';
  * COMPONENT MUST BE FULLY SELF-CONTAINED
  *
  * Intended to render results to generate images for email recommendations.
- * 
+ *
  * Details:
  *  - component should not render a grid (1 result per line)
  *  - cannot tie into external scripting
@@ -18,19 +18,18 @@ import './Email.scss';
  *  - lazy loading should be disabled
  *  - each result must have id={`ss-emailrec${index}`}
  *  - results should not contain any interactive elements (ie. image pagination arrows, color swatches)
- * 
+ *
  * Test:
  *  - https://localhost:3333/email.html
- * 
+ *
  **/
 
-@observer
-export class Email extends Component {
-	render() {
-		const controller = this.props.controller;
-		const store = controller?.store;
+export const Email = observer((props) => {
+	const controller = props.controller;
+	const store = controller?.store;
 
-		return store.results.length > 0 && (
+	return (
+		store.results.length > 0 && (
 			<Fragment>
 				{store.results.map((result, idx) => (
 					/* THIS OUTER "ss-emailrec" WRAPPER SHOULD NOT BE REMOVED, IT IS REQUIRED */
@@ -43,14 +42,15 @@ export class Email extends Component {
 								components: {
 									image: {
 										// lazy loading should be disabled
-										lazy: false,	
+										lazy: false,
 									},
 								},
-							}} />
+							}}
+						/>
 						{/* END result component changes */}
 					</div>
 				))}
 			</Fragment>
-		);
-	}
-}
+		)
+	);
+});
