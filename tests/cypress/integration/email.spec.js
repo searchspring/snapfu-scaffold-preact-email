@@ -35,10 +35,8 @@ config?.pages?.forEach((page, _i) => {
 					window[`ga-disable-${config.disableGA}`] = true;
 				}
 
-				cy.waitForController(page.id).then(() => {
-					cy.snapController(page.id).then(({ store }) => {
-						expect(typeof store).to.equal('object');
-					});
+				cy.waitForController(page.id).then(({ store }) => {
+					expect(typeof store).to.equal('object');
 				});
 			});
 

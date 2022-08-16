@@ -89,7 +89,7 @@ Cypress.Commands.add('waitForController', (controllerId = 'search') => {
 				if (window.searchspring.controller && window.searchspring.controller[controllerId]) {
 					if (!window.searchspring.controller[controllerId].store.loading) {
 						clearInterval(interval);
-						resolve();
+						resolve(window.searchspring.controller[controllerId]);
 					}
 				}
 			}, checkTimeout);
