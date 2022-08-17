@@ -58,28 +58,6 @@ Cypress.Commands.add('addCloudSnap', (branch = 'production') => {
 	cy.addScript(`https://snapui.searchspring.io/${packageJSON.searchspring.siteId}/${branch}/bundle.js`);
 });
 
-Cypress.Commands.add('snapController', (controllerId = 'search') => {
-	cy.window().then((window) => {
-		return new Cypress.Promise((resolve, reject) => {
-			const cntrlr = window.searchspring.controller[controllerId];
-
-			if (cntrlr) {
-				const after = function afterLoad({ controller }) {
-					controller.eventManager.events.afterStore.remove(afterLoad);
-					resolve(cntrlr);
-				};
-
-				if (cntrlr.store.loading) {
-					return cntrlr.on('afterStore', after);
-				} else {
-					resolve(cntrlr);
-				}
-			} else {
-				reject(`no controller found with id: ${controllerId}`);
-			}
-		});
-	});
-});
 
 Cypress.Commands.add('waitForController', (controllerId = 'search') => {
 	cy.window().then((window) => {

@@ -11,7 +11,7 @@
 
  const config = {
 	pages: [
-		{ url: 'https://localhost:3333/email.html', id: 'recommend_trending_0' },
+		{ url: 'https://localhost:3333/email.html', id: 'recommend_trending0' },
 	],
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 };
@@ -41,7 +41,7 @@ config?.pages?.forEach((page, _i) => {
 			});
 
 			it('has data in the store', () => {
-				cy.snapController(page.id).then(({ store }) => {
+				cy.waitForController(page.id).then(({ store }) => {
 					expect(store.results.length).to.be.greaterThan(0);
 				});
 			});
@@ -49,7 +49,7 @@ config?.pages?.forEach((page, _i) => {
 
 		describe('renders results ', () => {
 			it('has correct product count per page and correct needed wrapper styles', function () {
-				cy.snapController(page.id).then(({ store }) => {
+				cy.waitForController(page.id).then(({ store }) => {
 					for (let i = 0; i < store.results.length; i++) {
 						cy.get('#ss-emailrec' + i).should('exist');
 
