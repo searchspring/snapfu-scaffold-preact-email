@@ -35,13 +35,13 @@ config?.pages?.forEach((page, _i) => {
 					window[`ga-disable-${config.disableGA}`] = true;
 				}
 
-				cy.waitForController(page.id).then(({ store }) => {
+				cy.snapController(page.id).then(({ store }) => {
 					expect(typeof store).to.equal('object');
 				});
 			});
 
 			it('has data in the store', () => {
-				cy.waitForController(page.id).then(({ store }) => {
+				cy.snapController(page.id).then(({ store }) => {
 					expect(store.results.length).to.be.greaterThan(0);
 				});
 			});
@@ -49,7 +49,7 @@ config?.pages?.forEach((page, _i) => {
 
 		describe('renders results ', () => {
 			it('has correct product count per page and correct needed wrapper styles', function () {
-				cy.waitForController(page.id).then(({ store }) => {
+				cy.snapController(page.id).then(({ store }) => {
 					for (let i = 0; i < store.results.length; i++) {
 						cy.get('#ss-emailrec' + i).should('exist');
 

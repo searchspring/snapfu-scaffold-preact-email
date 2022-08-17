@@ -59,7 +59,7 @@ Cypress.Commands.add('addCloudSnap', (branch = 'production') => {
 });
 
 
-Cypress.Commands.add('waitForController', (controllerId = 'search') => {
+Cypress.Commands.add('snapController', (controllerId = 'search') => {
 	cy.window().then((window) => {
 		return new Cypress.Promise((resolve) => {
 			const checkTimeout = 100;
