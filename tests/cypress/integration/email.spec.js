@@ -52,8 +52,6 @@ config?.pages?.forEach((page, _i) => {
 				cy.snapController(page.id).then(({ store }) => {
 					for (let i = 0; i < store.results.length; i++) {
 						cy.get('#ss-emailrec' + i).should('exist');
-
-						cy.get('#ss-emailrec' + i).should('have.css', 'width', '240px')
 					}
 				});
 			});
