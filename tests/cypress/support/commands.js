@@ -58,7 +58,6 @@ Cypress.Commands.add('addCloudSnap', (branch = 'production') => {
 	cy.addScript(`https://snapui.searchspring.io/${packageJSON.searchspring.siteId}/${branch}/bundle.js`);
 });
 
-
 Cypress.Commands.add('snapController', (controllerId = 'search') => {
 	cy.window().then((window) => {
 		return new Cypress.Promise((resolve) => {
@@ -90,15 +89,15 @@ Cypress.Commands.add('waitForBundle', () => {
 });
 
 Cypress.Commands.add('waitForIdle', (options) => {
-	options = { initialTimeout: 2000, additionalTimeout: 200, ...options };
+	options = { timeout: 200, ...options };
 
-	return cy.window().then({ timeout: options.initialTimeout }, (window) => {
+	return cy.window().then((window) => {
 		return new Cypress.Promise((resolve) => {
-			let timeout = setTimeout(resolve, options.additionalTimeout);
+			let timeout = setTimeout(resolve, options.timeout);
 
 			const observer = new window.PerformanceObserver(() => {
 				clearTimeout(timeout);
-				timeout = setTimeout(resolve, options.additionalTimeout);
+				timeout = setTimeout(resolve, options.timeout);
 			});
 
 			observer.observe({ entryTypes: ['resource'] });
