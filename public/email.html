@@ -56,7 +56,7 @@
         if (!config.siteId) {
             console.error('No siteId found. Please check your config.');
         } else {
-            const profile = "trending";
+            const profile = "default-trending";
             const { results, component, siteId, currentBranch } = config;
             const profileResponse = {"profile":{"tag":profile,"display":{"template":{"component":component},"templateParameters":{}}}};
             const profileKey = `/api/personalized-recommendations/profile.json{"tag":"${profile}","siteId":"${siteId}","branch":"development"}`;
@@ -74,7 +74,7 @@
 </head>
 
 <body>
-    <script type="searchspring/recommend" profile="trending"></script>
+    <script type="searchspring/recommend" profile="default-trending"></script>
 </body>
 
 </html>
