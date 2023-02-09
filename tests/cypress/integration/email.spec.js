@@ -11,7 +11,7 @@
 
  const config = {
 	pages: [
-		{ url: 'https://localhost:3333/email.html', id: 'recommend_trending_0' },
+		{ url: 'https://localhost:3333/email.html', id: 'recommend_default-trending_0' },
 	],
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 };
