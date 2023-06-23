@@ -1,18 +1,16 @@
 /**
  * End to end tests with Cypress!
- * 
- * The purpose of these tests is to prevent publishing of the bundle if a 
+ *
+ * The purpose of these tests is to prevent publishing of the bundle if a
  * breaking change has been made to the implementation code in the future
- * 
- * Start by fill out the config object below. If a selector is not provided, 
+ *
+ * Start by fill out the config object below. If a selector is not provided,
  * the applicable tests will be skipped.
- * 
+ *
  */
 
- const config = {
-	pages: [
-		{ url: 'https://localhost:3333/email.html', id: 'recommend_default-trending_0' },
-	],
+const config = {
+	pages: [{ url: 'https://localhost:3333/email.html', id: 'recommend_default-trending_0' }],
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 };
 
@@ -25,7 +23,7 @@ config?.pages?.forEach((page, _i) => {
 				cy.addLocalSnap();
 
 				cy.waitForBundle().then(() => {
-					cy.window().then(window => {
+					cy.window().then((window) => {
 						expect(window.searchspring).to.exist;
 					});
 				});
