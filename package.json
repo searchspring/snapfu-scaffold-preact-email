@@ -32,7 +32,7 @@
 			"email"
 		],
 		"version": "0.51.0",
-		"scaffold": "snapfu-template-preact-email"
+		"scaffold": "snapfu-scaffold-preact-email"
 	},
 	"prettier": "@searchspring/prettier",
 	"dependencies": {
